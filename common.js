@@ -5,14 +5,14 @@ function removeElement(name) {
 
 function incList(name, size) {
 	var div = document.getElementById(name);
-	div.firstChild.innerHTML += '<br /><input class="textstore" type="text" style="width:' + size + 'px" />';
+	var top = div.getElementsByClassName("liststore").length * 19;
+	div.firstChild.innerHTML += '<input class="nottop liststore textstore" type="text" style="width:' + size + 'px; top:' + top + 'px;" />';
 }
 
 function decList(name) {
 	var div = document.getElementById(name);
 	if (div.firstChild.lastChild.tagName !== "IMG") {
 		var size = div.firstChild.firstChild.size;
-		div.firstChild.removeChild(div.firstChild.lastChild);
 		div.firstChild.removeChild(div.firstChild.lastChild);
 	}
 }

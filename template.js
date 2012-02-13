@@ -89,7 +89,7 @@ function addList() {
 	
 	var innerDiv = document.createElement('div');
 	newdiv.appendChild(innerDiv);
-	innerDiv.innerHTML = '<input class="textstore" type="text" style="width:' + size + 'px" />';
+	innerDiv.innerHTML = '<input class="liststore textstore" type="text" style="width:' + size + 'px" />';
 	innerDiv.appendChild(minus);
 	innerDiv.innerHTML += " ";
 	innerDiv.appendChild(plus);

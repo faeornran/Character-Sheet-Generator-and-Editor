@@ -46,3 +46,8 @@ div.dragged {
 	cursor: all-scroll !important;
 	z-index: 300 !important;
 }
+
+input.nottop {
+	position: absolute;
+	left:0px;
+}
