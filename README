@@ -1,0 +1,30 @@
+Apologies for the lack of comments, this was something I wanted to hack together to make very quickly.
+
+More work will be coming.  I will probably switch over to using jQuery some time in the future, but I didn't feel like learning it this weekend and just wanted to have this thing done.
+
+I hate IE, so I didn't bother to add any compatibility for it.  If it miraculously works somehow, then great!  Otherwise, you have been warned that it was not at all tested nor developed for.
+
+As far as compatibility with other browsers go, I have tested this with Chrome and Firefox and it works fine in both.
+
+To install:
+Copy the files in a folder that is in the same directory as your phpbb forum's root folder.  Alternatively, change the appropriate phpbb_* scripts to point to the right place.  Once you do that, create a templates subfolder and you should be set.
+
+To use templatemaker.php:
+Play around with the buttons.  Size affects only textboxes and lists. Click and drag everything around, including the menu.  Anything added gets added directly under the menu.
+
+For both templatemaker.php and charsheet.php:
+Saving is only enabled if a person is logged into the phpbb forum.  Loading is enabled for everyone.
+
+Standard load: Type the name of the file (IE, the file name before the file extension) and hit enter when logged in.  This doesn't work if you're not logged in.
+
+Otherwise, you can load files from other user's accounts even if logged out, and see their templates and character sheets.  Type <username>/<filename> to access a particular user's documents.  Again, don't include the extension of the filename.
+
+All non a-zA-Z0-9 characters are stripped from the filenames when being saved. 
+All non a-zA-Z0-9 characters and non / characters are removed when being loaded.
+
+If something breaks, please let me know!
+
+Cheers,
+
+-James
+
