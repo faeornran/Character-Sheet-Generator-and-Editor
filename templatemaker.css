@@ -1,0 +1,36 @@
+button#save, button#load, span#savestatus {
+	position: absolute;
+}
+
+button#save {
+	left: 57%;
+}
+
+button#load {
+	left: 70%;
+}
+
+span#savestatus {
+	top: 55%;
+	left: 84%;
+}
+
+a.delLink {
+	position: absolute;
+	top: -20px;
+	right: -2px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #000000;
+	background-image: none;
+	font-size: 120%;
+	text-align: center;
+	padding: 0;
+	background-color: #ffffff;
+	opacity: .5;
+}
+
+input#textboxSize {
+	width: 50px;
+}
+
