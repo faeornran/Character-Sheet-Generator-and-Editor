@@ -10,48 +10,35 @@ div#menu {
 }
 
 div.textbox {
-//	width: 150px;
-//	height: 50px;
-//	background-color: #ffffff;
 	position: absolute;
-	top: 80px;
-	left: 0;
 	cursor: pointer;
 	z-index: 200;
 }
 
 div.label {
-//	width: 150px;
-//	height: 50px;
 	background-color: #ffffff;
 	position: absolute;
-	top: 80px;
-	left: 0;
 	cursor: pointer;
 	z-index: 200;
 }
 
 div.background {
-//	width: 150px;
-//	height: 50px;
-//	background-color: #ffffff;
 	position: absolute;
-	top: 80px;
-	left: 0;
 	cursor: pointer;
 	z-index: 100;
 }
 
 div.list {
-//	width: 150px;
-//	height: 50px;
-//	background-color: #ffffff;
 	position: absolute;
-	top: 80px;
-	left: 0;
 	cursor: pointer;
 	z-index: 200;
 	white-space: nowrap;
+}
+
+div.check {
+	position: absolute;
+	cursor: pointer;
+	z-index: 200;
 }
 
 div.dragged {

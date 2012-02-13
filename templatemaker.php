@@ -20,6 +20,7 @@
 			<button class="menuitem" id="addLabel">Add Label</button>
 			<button class="menuitem" id="addList">Add List</button>
 			<button class="menuitem" id="addBackground">Add Background</button>
+			<button class="menuitem" id="addCheck">Add Checkbox</button>
 			<br />
 			<label for="textboxSize">Size</label>
 			<input class="menuitem" id="textboxSize" type="text" maxlength=5 value="100"/>

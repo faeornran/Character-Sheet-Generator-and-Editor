@@ -93,11 +93,24 @@ function addList() {
 	innerDiv.appendChild(minus);
 	innerDiv.innerHTML += " ";
 	innerDiv.appendChild(plus);
-//	var anch = document.createElement('a');
-//	anch.id = 'del'+name
-//	anch.className = 'delLink'
-//	anch.innerHTML = 'X'
-//	newdiv.appendChild(anch);
+	playground.appendChild(newdiv);
+	initElement(name);
+}
+
+function addCheck() {
+	if (typeof addCheck.count === 'undefined') {
+		addCheck.count = 0;
+	}
+
+	var playground = document.getElementById("playground");
+	var newdiv = document.createElement('div');
+	newdiv.setAttribute('style', getInitialPosition());
+	var name = 'check' + addCheck.count++;
+	newdiv.setAttribute('id', name);
+	newdiv.setAttribute('class', "check");
+	var innerDiv = document.createElement('div');
+	newdiv.appendChild(innerDiv);
+	innerDiv.innerHTML = '<input type="checkbox" />';
 	playground.appendChild(newdiv);
 	initElement(name);
 }
@@ -159,6 +172,7 @@ function loadTemplate(filename) {
 			addLabel.count = getBiggestId(document.getElementsByClassName("label"), 5);
 			addList.count = getBiggestId(document.getElementsByClassName("list"), 4);
 			addBackground.count = getBiggestId(document.getElementsByClassName("background"),10);
+			addCheck.count = getBiggestId(document.getElementsByClassName("check"), 5);
 			for (var i=0; i < playground.length; i++) {
 //				playground[i].innerHTML += '<a id="del'+playground[i].id+'" class="delLink">X</a>';
 				initElement(playground[i].id);
@@ -192,6 +206,7 @@ window.onload = function () {
 	document.getElementById("addLabel").setAttribute('onclick', 'addLabel()');
 	document.getElementById("addBackground").setAttribute('onclick', 'addBackground()');
 	document.getElementById("addList").setAttribute('onclick', 'addList()');
+	document.getElementById("addCheck").setAttribute('onclick', 'addCheck()');
 	document.getElementById("save").setAttribute('onclick', 'save()');
 	document.getElementById("load").setAttribute('onclick', 'load()');
 	document.getElementById("textboxSize").setAttribute('onclick', 'sizeHighlight()');
