@@ -20,6 +20,7 @@ div.label {
 	position: absolute;
 	cursor: pointer;
 	z-index: 200;
+	white-space:nowrap;
 }
 
 div.background {
