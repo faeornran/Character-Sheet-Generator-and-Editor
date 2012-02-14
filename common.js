@@ -18,12 +18,14 @@ function decList(name) {
 }
 
 function promptIO(message, type) {
-	var filename = prompt(message, "");
+	if (promptIO.filename == undefined) {
+		promptIO.filename = "";
+	}
+	var filename = prompt(message, promptIO.filename);
 	if (filename == null || filename == "" ) {
 		return;
 	} else if (type == "load") {
 		filename.replace(/[^a-zA-Z\/0-9]+/g,'');
-		
 	} else {
 		filename.replace(/[^a-zA-Z0-9]+/g,'');
 	}
@@ -31,6 +33,8 @@ function promptIO(message, type) {
 		savestatus.innerHTML = "Too long.";
 		setTimeout("savestatus.innerHTML = ''", 1500);
 		return;
+	} else {
+		promptIO.filename = filename;
 	}
 	return filename;
 }
