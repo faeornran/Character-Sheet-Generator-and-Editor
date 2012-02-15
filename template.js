@@ -144,7 +144,7 @@ function save() {
 		}
 		setTimeout("savestatus.innerHTML = ''", 1500);
 	}
-	var tosend = ("name="+filename+"&text="+readPage()).replace(/(&quot;)/g,"'");
+	var tosend = ("name="+filename+"&text="+readPage());
 	xmlhttp.send(tosend);
 }
 

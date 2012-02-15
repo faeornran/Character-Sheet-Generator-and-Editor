@@ -7,7 +7,8 @@
 		} else {
 			$filename = $dir . "/" . trim(preg_replace("/[^a-zA-Z0-9]+/", "", $_POST["name"])) . ".template";
 			$fh = fopen($filename, 'w') or die("Failed...");
-			fwrite($fh, trim($_POST["text"]));
+			$text = preg_replace('/value=".*"/', '', trim($_POST["text"]));
+			fwrite($fh, $text);
 			fclose($fh);
 			echo "Saved!";
 		}
