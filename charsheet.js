@@ -9,9 +9,21 @@ window.onload = function() {
 	}
 }
 
+function checked(checkboxDiv) {
+	if (typeof checkboxDiv == 'string')
+		checkboxDiv = document.getElementById(checkboxDiv);
+	var checkbox = checkboxDiv.firstChild.firstChild;
+	if (checkbox.getAttribute("checked") == null) {
+		checkbox.setAttribute("checked", "checked");
+	} else {
+		checkbox.removeAttribute("checked");
+	}
+}
+
 function readPage() {
 	var xmlwrapper = document.createElement("div");
 	xmlwrapper.innerHTML = document.getElementById("playground").innerHTML;
+	var s = xmlwrapper.innerHTML;
 	return xmlwrapper.innerHTML;
 }
 
@@ -35,7 +47,8 @@ function save() {
 	for (var i = 0; i < textboxes.length; i++) {
 		textboxes[i].setAttribute("value", textboxes[i].value);
 	}
-	xmlhttp.send("name="+filename+"&text=" + readPage());
+	var s = readPage().replace(/&/g, "%26").replace(/\+/g, "%2B");
+	xmlhttp.send("name="+filename+"&text=" + s);
 }
 
 function loadCharacter(filename) {
@@ -47,6 +60,10 @@ function loadCharacter(filename) {
 			xmlhttp.responseText != "Failed..." && xmlhttp.responseText != "Login!") {
 			savestatus.innerHTML = "Loaded!";
 			document.getElementById("playground").innerHTML = xmlhttp.responseText;
+			var checks = document.getElementsByClassName("check");
+			for (var i = 0; i < checks.length; i++) {
+				checks[i].setAttribute('onclick', 'checked('+checks[i].id+')');
+			}
 		} else if (xmlhttp.responseText == "Failed..." || xmlhttp.responseText == "Login!") {
 			savestatus.innerHTML = xmlhttp.responseText;
 		}
