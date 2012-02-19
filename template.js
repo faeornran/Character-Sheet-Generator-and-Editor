@@ -1,7 +1,8 @@
-function sizeHighlight() {
-	var siz = document.getElementById("textboxSize");
-	siz.focus();
-	siz.select();
+function highlight(textbox) {
+	if (typeof(textbox) == 'string')
+		textbox = document.getElementById(textbox);
+	textbox.focus();
+	textbox.select();
 }
 
 function getInitialPosition() {
@@ -194,10 +195,12 @@ function load() {
 	loadTemplate(filename);
 }
 
-function restrictChars() {
-	var box = document.getElementById("textboxSize");
-	var str = box.value.replace(/[^0-9]+/g,"");
-	box.value = str;
+function restrictChars(textbox) {
+	if (typeof(textbox) == 'string')
+		textbox = document.getElementById(textbox);
+	//var box = document.getElementById("textboxSize");
+	var str = textbox.value.replace(/[^0-9]+/g,"");
+	textbox.value = str;
 }
 
 window.onload = function () {
@@ -209,8 +212,10 @@ window.onload = function () {
 	document.getElementById("addCheck").setAttribute('onclick', 'addCheck()');
 	document.getElementById("save").setAttribute('onclick', 'save()');
 	document.getElementById("load").setAttribute('onclick', 'load()');
-	document.getElementById("textboxSize").setAttribute('onclick', 'sizeHighlight()');
-	document.getElementById("textboxSize").setAttribute('onkeyup', 'restrictChars()');
+	document.getElementById("textboxSize").setAttribute('onclick', 'highlight(textboxSize)');
+	document.getElementById("pixelDistance").setAttribute('onclick', 'highlight(pixelDistance)');
+	document.getElementById("textboxSize").setAttribute('onkeyup', 'restrictChars(textboxSize)');
+	document.getElementById("pixelDistance").setAttribute('onkeyup', 'restrictChars(pixelDistance)');
 	var file = $_GET("file");
 	if (file != undefined) {
 		loadTemplate(file);

@@ -25,6 +25,9 @@
 			<label for="textboxSize">Size</label>
 			<input class="menuitem" id="textboxSize" type="text" maxlength=5 value="100"/>
 			<span id="pxlabel">px</span>
+			<label for="pixelDistance">Key Pixels</label>
+			<input class="menuitem" id="pixelDistance" type="text" maxlength=3 value="8"/>
+			<span id="pxlabel">px</span>
 			<button class="menuitem" id="save" >Save</button>
 			<button class="menuitem" id="load" >Load</button>
 			<span id="savestatus"></span>

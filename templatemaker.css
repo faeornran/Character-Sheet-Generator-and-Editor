@@ -30,7 +30,10 @@ a.delLink {
 	opacity: .5;
 }
 
-input#textboxSize {
+input#textboxSize, input#pixelDistance {
 	width: 50px;
 }
 
+span#pxlabel {
+	padding-right: 12px;
+}
