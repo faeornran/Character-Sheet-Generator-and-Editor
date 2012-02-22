@@ -79,7 +79,7 @@ dragDrop = {
 		var evt = e || window.event;
 		var key = evt.keyCode;
 		var keySpeed = dragDrop.keySpeed;
-		if (document.getElementById != null) {
+		if (document.getElementById("pixelDistance") != null) {
 			keySpeed = parseInt(document.getElementById("pixelDistance").value);
 		}
 		switch (key) {

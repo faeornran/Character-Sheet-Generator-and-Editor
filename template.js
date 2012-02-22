@@ -82,11 +82,11 @@ function addList() {
 	var minus = document.createElement('img');
 	minus.src = 'images/minus.jpg'
 	minus.id = 'minus' + name
-	minus.setAttribute('onclick', 'decList("'+name+'")');
+	minus.setAttribute('onclick', "decList('"+name+"')");
 	var plus = document.createElement('img');
 	plus.src = 'images/plus.jpg'
 	plus.id = 'plus' + name
-	plus.setAttribute('onclick', 'incList("'+name+'", '+textboxSize.value+')');
+	plus.setAttribute('onclick', "incList('"+name+"', "+textboxSize.value+")");
 	
 	var innerDiv = document.createElement('div');
 	newdiv.appendChild(innerDiv);
@@ -175,11 +175,10 @@ function loadTemplate(filename) {
 			addBackground.count = getBiggestId(document.getElementsByClassName("background"),10);
 			addCheck.count = getBiggestId(document.getElementsByClassName("check"), 5);
 			for (var i=0; i < playground.length; i++) {
-//				playground[i].innerHTML += '<a id="del'+playground[i].id+'" class="delLink">X</a>';
 				initElement(playground[i].id);
 			}
 			savestatus.innerHTML = "Loaded!";
-		} else if (xmlhttp.responseText == "Failed..." || xmlhttp.responseText == "Login!") {
+		} else { //if (xmlhttp.responseText == "Failed..." || xmlhttp.responseText == "Login!") {
 			savestatus.innerHTML = xmlhttp.responseText;
 		}
 		setTimeout("savestatus.innerHTML = ''", 1500);

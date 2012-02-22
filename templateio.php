@@ -4,6 +4,8 @@
 		$dir = "templates/" . $username;
 		if (!file_exists($dir) && !mkdir($dir)) {
 			echo "Failed...";
+		} else if ($baduser) {
+			echo "Bad user.";
 		} else {
 			$filename = $dir . "/" . trim(preg_replace("/[^a-zA-Z0-9]+/", "", $_POST["name"])) . ".template";
 			$fh = fopen($filename, 'w') or die("Failed...");
