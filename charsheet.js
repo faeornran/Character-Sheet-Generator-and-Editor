@@ -7,6 +7,10 @@ window.onload = function() {
 	if (file != undefined) {
 		loadCharacter(file);
 	}
+	var template = $_GET("template");
+	if (template != undefined) {
+		getTemplate(template);
+	}
 }
 
 function checked(checkboxDiv) {
@@ -85,6 +89,10 @@ function loadTemplate() {
 	if (filename == undefined) {
 		return;
 	}
+	getTemplate(filename);
+}
+
+function getTemplate(filename) {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("GET", "templateio.php?name="+filename, true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -99,4 +107,5 @@ function loadTemplate() {
 		setTimeout("savestatus.innerHTML = ''", 1500);
 	}
 	xmlhttp.send(null);
+	
 }
