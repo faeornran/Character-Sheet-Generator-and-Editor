@@ -1,4 +1,5 @@
 <?php
+	$allowed_group = "charcreate";
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		require_once("phpbb_php_login.php");
 		$dir = "templates/" . $username;
