@@ -16,13 +16,11 @@
         $auth->acl($user->data);
         
 	$user_id = $user->data['user_id'];
-	$username = $user->data['username'];
 	$baduser = false;
-	if ($user_id == ANONYMOUS) {
+	if ($username == ANONYMOUS) {
 		echo "Login!";
 		exit();
-	} elseif (!group_memberships(get_group_id($allowed_group), $user->data["user_id"], true)) {
+	} elseif (!group_memberships(get_group_id("charcreate"), $user->data["user_id"], true)) {
 		$baduser = true;
 	}
-	$isAdmin = group_memberships(get_group_id("Administrators"), $user->data["user_id"], true);
 ?>

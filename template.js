@@ -178,11 +178,10 @@ function loadTemplate(filename) {
 				initElement(playground[i].id);
 			}
 			savestatus.innerHTML = "Loaded!";
-			setTimeout("savestatus.innerHTML = ''", 1500);
-		} else if (xmlhttp.responseText == "Failed..." || xmlhttp.responseText == "Login!") {
+		} else { //if (xmlhttp.responseText == "Failed..." || xmlhttp.responseText == "Login!") {
 			savestatus.innerHTML = xmlhttp.responseText;
-			setTimeout("savestatus.innerHTML = ''", 1500);
 		}
+		setTimeout("savestatus.innerHTML = ''", 1500);
 	}
 	xmlhttp.send(null);
 }
