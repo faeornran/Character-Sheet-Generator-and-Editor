@@ -9,7 +9,11 @@
 			echo "Bad user.";
 		} else {
 			$filename = $dir . "/" . trim(preg_replace("/[^a-zA-Z0-9]+/", "", $_POST["name"])) . ".template";
-			$fh = fopen($filename, 'w') or die("Failed...");
+			if (file_exists($filename)) {
+				$new = $filename . ".bak";
+				copy($filename, $new) or die("Failed to copy old file.");
+			}
+			$fh = fopen($filename, 'w') or die("Failed to write new file.");
 			$text = preg_replace('/value=".*"/', '', trim($_POST["text"]));
 			fwrite($fh, $text);
 			fclose($fh);
