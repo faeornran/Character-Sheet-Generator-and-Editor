@@ -53,7 +53,7 @@ dragDrop = {
 		//dragDrop.startDrag(this.relatedElement);
 		dragDrop.dXKeys = dragDrop.dYKeys = 0;
 		addEventSimple(document,'keydown',dragDrop.dragKeys);
-		addEventSimple(document,'keypress',dragDrop.switchKeyEvents);
+		//addEventSimple(document,'keypress',dragDrop.switchKeyEvents);
 		//this.blur();
 		return false;
 	},
@@ -125,13 +125,13 @@ dragDrop = {
 	switchKeyEvents: function () {
 		// for Opera and Safari 1.3
 		removeEventSimple(document,'keydown',dragDrop.dragKeys);
-		removeEventSimple(document,'keypress',dragDrop.switchKeyEvents);
+		//removeEventSimple(document,'keypress',dragDrop.switchKeyEvents);
 		addEventSimple(document,'keypress',dragDrop.dragKeys);
 	},
 
 	releaseElementKeys: function() {
 		removeEventSimple(document,'keypress',dragDrop.dragKeys);
-		removeEventSimple(document,'keypress',dragDrop.switchKeyEvents);
+		//removeEventSimple(document,'keypress',dragDrop.switchKeyEvents);
 		removeEventSimple(document,'keydown',dragDrop.dragKeys);
 		dragDrop.lastObject = null;
 	},

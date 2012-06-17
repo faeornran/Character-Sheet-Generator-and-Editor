@@ -60,15 +60,40 @@
 		$dir = opendir($pathname);
 		$pre = true;
 		while (false !== ($entry = readdir($dir))) {
+			$fileList[] = $entry;
+		}
+		closedir($dir);
+		sort($fileList);
+		foreach ($fileList as $entry) {
+			if ($entry !== "." && $entry !== ".." && substr($entry, -4) !== ".bak") {
+				$pre = false;
+				echo "<li>";
+				$link = $subpath . $entry;
+				if (strlen($entry) > 5) {
+					if (substr_compare($entry, ".char", -strlen(".char"), strlen(".char")) === 0) {
+						$link = "charsheet.php?file=" . substr($link, 0, strlen($link)-5);
+					} else if (substr_compare($entry, ".template", -strlen(".template"), strlen(".template")) === 0) {
+						$link = "templatemaker.php?file=" . substr($link, 0, strlen($link)-9);
+					}
+				}
+				$href = ($pathname === "templates/") ? "#" : $link;
+				echo "<a href=" . $href . " >" . $entry . "</a>";
+				echo "<span class='button'><button>Remove</button></span>";
+				echo "</li>";
+			}
+			
+		}
+		/*
+		while (false !== ($entry = readdir($dir))) {
 			if ($entry !== "." && $entry !== "..") {
 				$pre = false;
 				echo "<li>";
-				$link = "'" . $subpath . $entry . "'";
+				$link = $subpath . $entry;
 				if (strlen($entry) > 5) {
 					if (substr_compare($entry, ".char", -strlen(".char"), strlen(".char")) === 0) {
-						$link = "charsheet.php?file=" . substr($link, 0, strlen($link)-6);
+						$link = "charsheet.php?file=" . substr($link, 0, strlen($link)-5);
 					} else if (substr_compare($entry, ".template", -strlen(".template"), strlen(".template")) === 0) {
-						$link = "templatemaker.php?file=" . substr($link, 0, strlen($link)-10);
+						$link = "templatemaker.php?file=" . substr($link, 0, strlen($link)-9);
 					}
 				}
 				$href = ($pathname === "templates/") ? "#" : $link;
@@ -77,10 +102,10 @@
 				echo "</li>";
 			}
 		}
+		*/
 		if ($pre) {
 			echo "Nothing to display.";
 		}
-		closedir($dir);
 	} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		if (!$isAdmin) {
 			$pathname .= $username . '/'; 

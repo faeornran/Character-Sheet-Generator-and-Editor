@@ -1,16 +1,19 @@
 window.onload = function() {
+	document.loading = false;
 	initElement('menu');
 	document.getElementById("save").setAttribute('onclick', 'save()');
 	document.getElementById("load").setAttribute('onclick', 'load()');
 	document.getElementById("loadTemplate").setAttribute('onclick', 'loadTemplate()');
 	var file = $_GET("file");
+	var template = $_GET("template");
 	if (file != undefined) {
 		loadCharacter(file);
-	}
-	var template = $_GET("template");
-	if (template != undefined) {
+		promptIO.filename = file.split("/")[file.split("/").length-1];
+	} else if (template != undefined) {
 		getTemplate(template);
+		promptIO.filename = template.split("/")[template.split("/").length-1];
 	}
+	
 }
 
 function checked(checkboxDiv) {
@@ -42,7 +45,7 @@ function save() {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			savestatus.innerHTML = xmlhttp.responseText;
-		} else {
+		} else if (xmlhttp.readyState == 4) {
 			savestatus.innerHTML = "Failed...";
 		}
 		setTimeout("savestatus.innerHTML = ''", 1500);
@@ -55,13 +58,37 @@ function save() {
 	xmlhttp.send("name="+filename+"&text=" + s);
 }
 
+
+function loadingFunc() {
+	if (document.loading) {
+		if (savestatus.innerHTML === "Loading   ") {
+			savestatus.innerHTML = "Loading.  ";
+		} else if (savestatus.innerHTML === "Loading.  ") {
+			savestatus.innerHTML = "Loading.. ";
+		} else if (savestatus.innerHTML === "Loading.. ") {
+			savestatus.innerHTML = "Loading...";
+		} else if (savestatus.innerHTML === "Loading...") {
+			savestatus.innerHTML = "Loading ..";
+		} else if (savestatus.innerHTML === "Loading ..") {
+			savestatus.innerHTML = "Loading  .";
+		} else {
+			savestatus.innerHTML = "Loading   ";
+		}
+		setTimeout("loadingFunc()", 200);
+	}
+	
+}
+
 function loadCharacter(filename) {
+	document.loading = true;
+	loadingFunc();
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("GET", "chario.php?name="+filename, true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && 
 			xmlhttp.responseText != "Failed..." && xmlhttp.responseText != "Login!") {
+			document.loading = false;
 			savestatus.innerHTML = "Loaded!";
 			document.getElementById("playground").innerHTML = xmlhttp.responseText;
 			var checks = document.getElementsByClassName("check");

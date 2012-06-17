@@ -4,7 +4,7 @@
 		require_once("phpbb_php_login.php");
 		$dir = "templates/" . $username;
 		if (!file_exists($dir) && !mkdir($dir)) {
-			echo "Failed...";
+			echo "Dir failed...";
 		} else if ($baduser) {
 			echo "Bad user.";
 		} else {
@@ -32,9 +32,9 @@
 		$filename = $filename . ".char";
 
 		if (!file_exists($filename)) {
-			echo "Failed...";
+			echo "No such file, failed...";
 		} else {
-			$contents = file_get_contents($filename) or die("Failed...");
+			$contents = file_get_contents($filename) or die("Load failed...");
 			echo $contents;
 		}
 	}

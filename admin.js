@@ -8,7 +8,7 @@ function getListing(pathname) {
 				var button = $($($(this).children()[1])).children();
 				var pathname = a.html(); 
 				a.click(function() { getListing(pathname); });
-				button.click(function() { removePath(pathname); });
+				button.click(function() { removePath(this, pathname); });
 			});
 		}
 	);
@@ -21,13 +21,13 @@ function clickGetListing() {
 }
 
 $(function() {
-	$("#load").click(clickGetListing());
+	//$("#load").click(clickGetListing());
 	getListing("");
 });
 
-function removePath(pathname) {
+function removePath(e, pathname) {
 	pathname = getListing.pathname + pathname;
-	var button = this.event.srcElement;
+	var button = e;
 	$.post("admin.php", { dir:pathname },
 		function(data) {
 			if (data === "deleted") {
