@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 	<head> 
@@ -9,6 +8,8 @@
 		<script type="text/javascript" src="admin.js"></script>
 	</head>
 	<body>
+		<p>Page has been deprecated.  Please stick to using <a href="charsheet.php">charsheet.php</a> and <a href="templatemaker.php">templatemaker.php</a>.</p>
+<!--
 		<div id="playground">
 			<div id="menu">
 				<input id="pathname"></input>
@@ -16,5 +17,6 @@
 			</div>
 			<ul id="list"></ul>
 		</div>
+-->
 	</body>
 </html>
