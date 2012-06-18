@@ -2,6 +2,9 @@
 	$allowed_group = "charcreate";
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		require_once("phpbb_php_login.php");
+		if (!$loggedIn) {
+			exit();
+		}
 		$dir = "templates/" . $username;
 		if (!file_exists($dir) && !mkdir($dir)) {
 			echo "Failed...";

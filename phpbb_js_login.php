@@ -9,6 +9,7 @@
 
 	$phpEx = "php";
 	$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : ROOT_PATH . '/';
+	echo($phpbb_root_path);
 	include($phpbb_root_path . 'common.' . $phpEx);
 
 	$user->session_begin();

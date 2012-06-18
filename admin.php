@@ -113,7 +113,7 @@
 			echo "Nothing to display.";
 		}
 	} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-		if (!$isAdmin && substr($pathname, -1 * strlen($username)) !== $username) {
+		if (!$loggedIn || !$isAdmin && substr($pathname, -1 * strlen($username)) !== $username) {
 			echo "Invalid delete command.";
 			exit();
 			//$pathname .= $username . '/'; 

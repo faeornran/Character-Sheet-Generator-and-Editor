@@ -1,18 +1,17 @@
-<?php
-	require_once('phpbb_js_login.php');
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 	<head> 
 		<title>Character Sheet Template Maker</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="jquery-1.7.1.min.js"></script> 
 		<script type="text/javascript" src="dragdrop.js"></script>
 		<script type="text/javascript" src="template.js"></script>
 		<script type="text/javascript" src="common.js"></script>
 		<script type="text/javascript" src="get.js"></script>
+		<script type="text/javascript" src="admin.js"></script>
 		<link rel="stylesheet" href="templatemaker.css" />
                 <link rel="stylesheet" href="common.css" />
+                <link rel="stylesheet" href="admin.css" />
 	</head>
 	<body>
 		<div id="menu">
@@ -33,6 +32,14 @@
 			<span id="savestatus"></span>
 		</div>
 		<div id="playground">
+		</div>
+		<div id="admin">
+			<div id="admin_menu">
+				<!-- <input id="pathname"></input>
+				<button id="load_pathname">Load Pathname</button> -->
+			</div>
+			<ul id="list"></ul>
+			<a href="#" id="close">X</a>
 		</div>
 	</body>
 </html>

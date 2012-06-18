@@ -51,3 +51,18 @@ input.nottop {
 	position: absolute;
 	left:0px;
 }
+
+a#close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #000000;
+	background-image: none;
+	font-size: 120%;
+	text-align: center;
+	padding: 0;
+	background-color: #ffffff;
+	opacity: .5;
+}

@@ -188,11 +188,18 @@ function loadTemplate(filename) {
 }
 
 function load() {
-	var filename = promptIO("Load what template name? (a-zA-Z0-9 only, or <username>/<filename>)", "load");
-	if (filename == undefined) {
-		return;
+	//var filename = promptIO("Load what template name? (a-zA-Z0-9 only, or <username>/<filename>)", "load");
+	//if (filename == undefined) {
+	//	return;
+	//}
+	//loadTemplate(filename);
+	if ($("#admin").css("visibility") === "hidden") {
+		load.type = ".template";
+		getListing("");
+		$("#admin").css("visibility", "visible");
+	} else {
+		$("#admin").css("visibility", "hidden");
 	}
-	loadTemplate(filename);
 }
 
 function restrictChars(textbox) {
@@ -220,5 +227,8 @@ window.onload = function () {
 	if (file != undefined) {
 		loadTemplate(file);
 	}
+	$("#close").click(function() { 
+		$("#admin").css("visibility", "hidden"); 
+	});
 }
 
