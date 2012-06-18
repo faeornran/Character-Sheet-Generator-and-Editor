@@ -1,5 +1,5 @@
 window.onload = function() {
-	document.loading = false;
+	loadingFunc.loading = false;
 	initElement('menu');
 	document.getElementById("save").setAttribute('onclick', 'save()');
 	document.getElementById("load").setAttribute('onclick', 'load()');
@@ -13,7 +13,9 @@ window.onload = function() {
 		getTemplate(template);
 		promptIO.filename = template.split("/")[template.split("/").length-1];
 	}
-	
+	$("#close").click(function() { 
+		$("#admin").css("visibility", "hidden"); 
+	});
 }
 
 function checked(checkboxDiv) {
@@ -42,13 +44,18 @@ function save() {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("POST","chario.php", true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	savingFunc.saving = true;
+	savingFunc();
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			savestatus.innerHTML = xmlhttp.responseText;
+			savingFunc.saving = false;
+			setTimeout("savestatus.innerHTML = ''", 1500);
 		} else if (xmlhttp.readyState == 4) {
 			savestatus.innerHTML = "Failed...";
+			savingFunc.saving = false;
+			setTimeout("savestatus.innerHTML = ''", 1500);
 		}
-		setTimeout("savestatus.innerHTML = ''", 1500);
 	}
 	var textboxes = document.getElementsByClassName("textstore");
 	for (var i = 0; i < textboxes.length; i++) {
@@ -60,7 +67,7 @@ function save() {
 
 
 function loadingFunc() {
-	if (document.loading) {
+	if (loadingFunc.loading) {
 		if (savestatus.innerHTML === "Loading   ") {
 			savestatus.innerHTML = "Loading.  ";
 		} else if (savestatus.innerHTML === "Loading.  ") {
@@ -79,44 +86,80 @@ function loadingFunc() {
 	
 }
 
+function savingFunc() {
+	if (savingFunc.saving) {
+		if (savestatus.innerHTML === "Saving   ") {
+			savestatus.innerHTML = "Saving.  ";
+		} else if (savestatus.innerHTML === "Saving.  ") {
+			savestatus.innerHTML = "Saving.. ";
+		} else if (savestatus.innerHTML === "Saving.. ") {
+			savestatus.innerHTML = "Saving...";
+		} else if (savestatus.innerHTML === "Saving...") {
+			savestatus.innerHTML = "Saving ..";
+		} else if (savestatus.innerHTML === "Saving ..") {
+			savestatus.innerHTML = "Saving  .";
+		} else {
+			savestatus.innerHTML = "Saving   ";
+		}
+		setTimeout("savingFunc()", 200);
+	}
+	
+}
+
 function loadCharacter(filename) {
-	document.loading = true;
+	loadingFunc.loading = true;
 	loadingFunc();
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("GET", "chario.php?name="+filename, true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && 
-			xmlhttp.responseText != "Failed..." && xmlhttp.responseText != "Login!") {
-			document.loading = false;
+			xmlhttp.responseText != "No such file, failed..." && xmlhttp.responseText != "Login!") {
+			loadingFunc.loading = false;
 			savestatus.innerHTML = "Loaded!";
 			document.getElementById("playground").innerHTML = xmlhttp.responseText;
 			var checks = document.getElementsByClassName("check");
 			for (var i = 0; i < checks.length; i++) {
 				checks[i].setAttribute('onclick', 'checked('+checks[i].id+')');
 			}
-		} else if (xmlhttp.responseText == "Failed..." || xmlhttp.responseText == "Login!") {
+			setTimeout("savestatus.innerHTML = ''", 1500);
+		} else if (xmlhttp.responseText === "No such file, failed..." || xmlhttp.responseText === "Login!") {
+			loadingFunc.loading = false;
 			savestatus.innerHTML = xmlhttp.responseText;
+			setTimeout("savestatus.innerHTML = ''", 1500);
 		}
-		setTimeout("savestatus.innerHTML = ''", 1500);
 	}
 	xmlhttp.send(null);
 }
 
 function load() {
-	var filename = promptIO("Load what file name? (a-zA-Z0-9 only, or <username>/<filename>)", "load");
-	if (filename == undefined) {
-		return;
+	//var filename = promptIO("Load what file name? (a-zA-Z0-9 only, or <username>/<filename>)", "load");
+	//if (filename == undefined) {
+	//	return;
+	//}
+	//loadCharacter(filename);
+	if (load.type === ".template" || $("#admin").css("visibility") === "hidden") {
+		load.type = ".char";
+		getListing("");
+		$("#admin").css("visibility", "visible");
+	} else {
+		$("#admin").css("visibility", "hidden");
 	}
-	loadCharacter(filename);
 }
 
 function loadTemplate() {
-	var filename = promptIO("Load what template name? (a-zA-Z0-9 only, or <username>/<filename>)", "load");
-	if (filename == undefined) {
-		return;
+	//var filename = promptIO("Load what template name? (a-zA-Z0-9 only, or <username>/<filename>)", "load");
+	//if (filename == undefined) {
+	//	return;
+	//}
+	//getTemplate(filename);
+	if (load.type === ".char" || $("#admin").css("visibility") === "hidden") {
+		load.type = ".template";
+		getListing("");
+		$("#admin").css("visibility", "visible");
+	} else {
+		$("#admin").css("visibility", "hidden");
 	}
-	getTemplate(filename);
 }
 
 function getTemplate(filename) {

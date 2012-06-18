@@ -43,12 +43,15 @@
 	$pathname = "templates/";
 	if ($_SERVER['REQUEST_METHOD'] == "GET") {
 		$subpath = "";
-		if ($isAdmin) {
+		$subpath = $_GET["dir"];
+		$subpath .= ($subpath !== "" && substr($subpath,-1) !== "/") ? "/" : "";
+		
+		/*if ($isAdmin) {
 			$subpath = $_GET["dir"];
 			$subpath .= ($subpath !== "" && substr($subpath,-1) !== "/") ? "/" : "";
 		} else {
 			$subpath = $username . '/';
-		}
+		}*/
 		$pathname .= $subpath;
 		
 
@@ -64,8 +67,9 @@
 		}
 		closedir($dir);
 		sort($fileList);
+		$fileType = $_GET["fileType"];
 		foreach ($fileList as $entry) {
-			if ($entry !== "." && $entry !== ".." && substr($entry, -4) !== ".bak") {
+			if ($entry !== "." && $entry !== ".." && (is_dir($pathname . $entry) || substr($entry, -1 * strlen($fileType)) === $fileType)) {
 				$pre = false;
 				echo "<li>";
 				$link = $subpath . $entry;
@@ -78,7 +82,9 @@
 				}
 				$href = ($pathname === "templates/") ? "#" : $link;
 				echo "<a href=" . $href . " >" . $entry . "</a>";
-				echo "<span class='button'><button>Remove</button></span>";
+				if ($isAdmin || substr($pathname, -1 * strlen($username) - 1, strlen($username)) === $username) {
+					echo "<span class='button'><button>Remove</button></span>";
+				}
 				echo "</li>";
 			}
 			
@@ -107,8 +113,10 @@
 			echo "Nothing to display.";
 		}
 	} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-		if (!$isAdmin) {
-			$pathname .= $username . '/'; 
+		if (!$isAdmin && substr($pathname, -1 * strlen($username)) !== $username) {
+			echo "Invalid delete command.";
+			exit();
+			//$pathname .= $username . '/'; 
 		} else if ($_POST["dir"] === NULL) {
 			echo "No directory provided.";
 			exit();

@@ -1,6 +1,6 @@
 function getListing(pathname) {
 	getListing.pathname = (pathname[pathname.length-1] == "/") ? pathname : pathname + "/";
-	$.get("admin.php", { dir:pathname },
+	$.get("admin.php", { dir:pathname, fileType:load.type },
 		function (data) {
 			$("#list").html(data);
 			$("li").each(function() { 
@@ -20,10 +20,10 @@ function clickGetListing() {
 	getListing(pathname);
 }
 
-$(function() {
+//$(function() {
 	//$("#load").click(clickGetListing());
-	getListing("");
-});
+//	getListing("");
+//});
 
 function removePath(e, pathname) {
 	pathname = getListing.pathname + pathname;
