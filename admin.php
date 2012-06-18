@@ -68,6 +68,7 @@
 		closedir($dir);
 		sort($fileList);
 		$fileType = $_GET["fileType"];
+		$pageURL = $_GET["pageURL"];
 		foreach ($fileList as $entry) {
 			if ($entry !== "." && $entry !== ".." && (is_dir($pathname . $entry) || substr($entry, -1 * strlen($fileType)) === $fileType)) {
 				$pre = false;
@@ -77,7 +78,7 @@
 					if (substr_compare($entry, ".char", -strlen(".char"), strlen(".char")) === 0) {
 						$link = "charsheet.php?file=" . substr($link, 0, strlen($link)-5);
 					} else if (substr_compare($entry, ".template", -strlen(".template"), strlen(".template")) === 0) {
-						$link = "templatemaker.php?file=" . substr($link, 0, strlen($link)-9);
+						$link = $pageURL . "?template=" . substr($link, 0, strlen($link)-9);
 					}
 				}
 				$href = ($pathname === "templates/") ? "#" : $link;

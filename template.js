@@ -223,12 +223,13 @@ window.onload = function () {
 	document.getElementById("pixelDistance").setAttribute('onclick', 'highlight(pixelDistance)');
 	document.getElementById("textboxSize").setAttribute('onkeyup', 'restrictChars(textboxSize)');
 	document.getElementById("pixelDistance").setAttribute('onkeyup', 'restrictChars(pixelDistance)');
-	var file = $_GET("file");
+	var file = $_GET("template");
 	if (file != undefined) {
 		loadTemplate(file);
 	}
 	$("#close").click(function() { 
 		$("#admin").css("visibility", "hidden"); 
 	});
+	load.url = "templatemaker.php";
 }
 

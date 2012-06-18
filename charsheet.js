@@ -16,6 +16,7 @@ window.onload = function() {
 	$("#close").click(function() { 
 		$("#admin").css("visibility", "hidden"); 
 	});
+	load.url = "charsheet.php";
 }
 
 function checked(checkboxDiv) {
