@@ -68,6 +68,7 @@ function save() {
 
 
 function loadingFunc() {
+	var savestatus = $("#savestatus")[0];
 	if (loadingFunc.loading) {
 		if (savestatus.innerHTML === "Loading   ") {
 			savestatus.innerHTML = "Loading.  ";
@@ -114,6 +115,7 @@ function loadCharacter(filename) {
 	xmlhttp.open("GET", "chario.php?name="+filename, true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.onreadystatechange = function() {
+		var savestatus = $("#savestatus")[0];
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && 
 			xmlhttp.responseText != "No such file, failed..." && xmlhttp.responseText != "Login!") {
 			loadingFunc.loading = false;
@@ -123,11 +125,11 @@ function loadCharacter(filename) {
 			for (var i = 0; i < checks.length; i++) {
 				checks[i].setAttribute('onclick', 'checked('+checks[i].id+')');
 			}
-			setTimeout("savestatus.innerHTML = ''", 1500);
+			setTimeout("$('#savestatus')[0].innerHTML = ''", 1500);
 		} else if (xmlhttp.responseText === "No such file, failed..." || xmlhttp.responseText === "Login!") {
 			loadingFunc.loading = false;
 			savestatus.innerHTML = xmlhttp.responseText;
-			setTimeout("savestatus.innerHTML = ''", 1500);
+			setTimeout("$('#savestatus')[0].innerHTML = ''", 1500);
 		}
 	}
 	xmlhttp.send(null);
@@ -168,6 +170,7 @@ function getTemplate(filename) {
 	xmlhttp.open("GET", "templateio.php?name="+filename, true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.onreadystatechange = function() {
+		var savestatus = $("#savestatus")[0];
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && 
 			xmlhttp.responseText != "Failed..." && xmlhttp.responseText != "Login!") {
 			savestatus.innerHTML = "Loaded!";
@@ -175,7 +178,7 @@ function getTemplate(filename) {
 		} else {
 			savestatus.innerHTML = xmlhttp.responseText;
 		}
-		setTimeout("savestatus.innerHTML = ''", 1500);
+		setTimeout("$('#savestatus')[0].innerHTML = ''", 1500);
 	}
 	xmlhttp.send(null);
 	
