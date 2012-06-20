@@ -83,7 +83,8 @@
 				}
 				$href = ($pathname === "templates/") ? "#" : $link;
 				echo "<a href=" . $href . " >" . $entry . "</a>";
-				if ($isAdmin || substr($pathname, -1 * strlen($username) - 1, strlen($username)) === $username) {
+
+				if ($isAdmin || $username !== "Anonymous" && substr($pathname, -1 * strlen($username) - 1, strlen($username)) === $username) {
 					echo "<span class='button'><button>Remove</button></span>";
 				}
 				echo "</li>";
@@ -114,7 +115,8 @@
 			echo "Nothing to display.";
 		}
 	} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-		if (!$loggedIn || !$isAdmin && substr($pathname, -1 * strlen($username)) !== $username) {
+		$pathname = $_POST["dir"];
+		if (!$loggedIn || !$isAdmin && substr($pathname, 0, strlen($username)) !== $username) {
 			echo "Invalid delete command.";
 			exit();
 			//$pathname .= $username . '/'; 
@@ -123,7 +125,7 @@
 			exit();
 		} 
 		//$pathname = preg_replace('/templates\//', "", $pathname);
-		$pathname .= preg_replace('/\.\.+/', ".", preg_replace('/(%2E)+/', ".", $_POST["dir"]));
+		$pathname = "templates/" . preg_replace('/\.\.+/', ".", preg_replace('/(%2E)+/', ".", $_POST["dir"]));
 		
 		if (deleteAll($pathname)) {
 			echo "deleted";

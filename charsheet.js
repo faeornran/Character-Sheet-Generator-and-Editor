@@ -89,6 +89,7 @@ function loadingFunc() {
 }
 
 function savingFunc() {
+	var savestatus = $("#savestatus")[0];
 	if (savingFunc.saving) {
 		if (savestatus.innerHTML === "Saving   ") {
 			savestatus.innerHTML = "Saving.  ";
